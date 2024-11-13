@@ -1,10 +1,9 @@
 from samba.dcerpc.dcerpc import empty
 
-
 def summary_simple(arr):
     """
     Метод, возвращающий сумму чисел массива,
-    использующий логический подход.
+    использующий циклический подход.
     """
     total = 0               #базовый случай
     for x in arr:           #обход каждого элемента массива arr[]
@@ -13,15 +12,29 @@ def summary_simple(arr):
 
 print("Возврат суммы элементов массива [1,2,3] = " + str(summary_simple([1, 2, 3])))
 
-def summary_recursive(arr, total = 0):
+def summary_recursive(arr, i = 0, summary = 0):
     """
-    Рекурсивный метод суммирования элементов в списке.
+    Рекурсивный метод подсчета элементов в списке.
     """
-    if len(arr) < 1:
-        return 0        #Так как не известно, какое базовое число хранится в массиве, вернем 0.
-                        # Иначе это значение тоже присуммируется.
+    if i >= len(arr):         #Логика рекурсии
+        return summary
     else:
-        return arr.pop() + summary_recursive(arr)  #суммирование последнего элемента массива с оставшимися элементами.
+        return summary_recursive(arr, i+1, summary+1)
 
-print("Возврат суммы элементов рекурсивного массива [1,2,3] = " + str(summary_recursive([1, 2, 3])))
+print("Рекурсивно. Возврат количества элементов массива [1,2,3] = " + str(summary_recursive([5])))
+
+
+def find_biggest(arr, i = 1, i_max = 0):
+    """Функция поиска наибольшего числа в массиве"""
+    if arr[i] > arr[i_max]:     #Логика поиска большего числа
+        i_max = i
+
+    if i >= len(arr)-1:         #Логика рекурсии
+        return arr[i_max]
+    else:
+        return find_biggest(arr, i+1, i_max)
+
+tested_array = [4,6,4,233,2,6,]
+biggest_value = find_biggest(tested_array)
+print("Рекурсивно. Поиск наибольшего числа в массиве: " + str(biggest_value))
 
