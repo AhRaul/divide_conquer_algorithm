@@ -3,7 +3,7 @@ def summary_simple(arr):
     Метод, возвращающий сумму чисел массива,
     использующий циклический подход.
     """
-    total = 0               #базовый случай
+    total = 0               #базовый случай (нулевое значение взято как возможный минимум)
     for x in arr:           #обход каждого элемента массива arr[]
         total += x          #добавление каждого элемента к базовому случаю.
     return total            #возврат сформированной суммы.
@@ -14,9 +14,9 @@ def summary_recursive(arr, i = 0, summary = 0):
     """
     Рекурсивный метод подсчета элементов в списке.
     """
-    if i >= len(arr):         #Логика рекурсии
+    if i >= len(arr):           #Базовый случай
         return summary
-    else:
+    else:                       #Рекурсивный случай
         return summary_recursive(arr, i+1, summary+1)
 
 print("Рекурсивно. Возврат количества элементов массива [1,2,3] = " + str(summary_recursive([5])))
@@ -27,9 +27,9 @@ def find_biggest(arr, i = 1, i_max = 0):
     if arr[i] > arr[i_max]:     #Логика поиска большего числа
         i_max = i
 
-    if i >= len(arr)-1:         #Логика рекурсии
+    if i >= len(arr)-1:         #Базовый случай(проверка каждого элемента массива)
         return arr[i_max]
-    else:
+    else:                       #Рекурсивный случай
         return find_biggest(arr, i+1, i_max)
 
 tested_array = [4,6,4,233,2,6,]
@@ -52,7 +52,7 @@ def binary_find_recursive(arr, finding_value, left_index = '', right_index = '')
         return current_index
 
     if left_index > right_index:  # Если все возможные значения отброшены, конец поиска.
-        return None                     #Базовый случай
+        return None                     #Базовый случай(минимальный возможный обьем проверяемого материала сводится к 1 элементу)
     else:                          # Если значения еще остались
         return binary_find_recursive(arr, finding_value, left_index, right_index)  # запуск рекурсии
 
